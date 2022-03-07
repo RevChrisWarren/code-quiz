@@ -3,31 +3,6 @@ var timerEl = document.getElementById("timer-count");
 var mainEl = document.getElementById("main");
 var btn = document.querySelector("button");
 
-var startBtnEl = document.createElement("button");
-startBtnEl.innerHTML = "Click to Begin"
-button.appendChild(startBtnEl);
-
-mainEl.textContent = "Javascript Code Quiz!"
-
-
-function quiz () {
-    var timeLeft = 120;
-var timeInterval = setInterval(function() {
-        if (timeLeft > 1) {
-        timerEl.textContent = timeLeft + " seconds remaining.";
-        timeLeft--;
-    } else if (timeLeft === 1) {
-        timerEl.textContent = timeLeft + " second remaining.";
-        timeLeft--;
-    } else {
-        timerEl.textContent = "";
-        clearInterval(timeInterval);
-        displayMessage();
-    }
-}, 1000);
-function buildQuiz() {}
-}
-
 var javascriptQuestions = [
   {
       question: "Who invented Javascript?",
@@ -140,6 +115,36 @@ function highscore () {
         highScoreEl = "Your score is " + timeLeft;
     }
 }
+
+var startBtnEl = document.createElement("button");
+startBtnEl.innerHTML = "Click to Begin"
+button.appendChild(startBtnEl);
+
+mainEl.textContent = "Javascript Code Quiz!"
+
+
+function quiz () {
+    var timeLeft = 120;
+var timeInterval = setInterval(function() {
+        if (timeLeft > 1) {
+        timerEl.textContent = timeLeft + " seconds remaining.";
+        timeLeft--;
+    } else if (timeLeft === 1) {
+        timerEl.textContent = timeLeft + " second remaining.";
+        timeLeft--;
+    } else {
+        timerEl.textContent = "";
+        clearInterval(timeInterval);
+        displayMessage();
+    }
+}, 1000);
+
+}
+function buildQuiz() {
+    mainEl.textContent = javascriptQuestions[0];
+}
+
+
 
 var startGame = document.getElementById("button")
  startGame.addEventListener("click", quiz);
