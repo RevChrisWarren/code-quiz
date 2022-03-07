@@ -141,7 +141,9 @@ var timeInterval = setInterval(function() {
 
 }
 function buildQuiz() {
-    mainEl.textContent = javascriptQuestions[0];
+    for (var i = 0; i < javascriptQuestions.length; i++) {
+    mainEl.innerHTML = javascriptQuestions[i].question;
+}
 }
 
 
