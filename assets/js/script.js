@@ -139,23 +139,16 @@ function removeStartBtn() {
 }
 function buildQuiz() {
 
-    for (var i = 0; i < javascriptQuestions.length; i++) {
-    mainEl.innerHTML = javascriptQuestions[i].question;
-
-    
-    
     var ansBtn1 = document.createElement("button");
     var ansBtn2 = document.createElement("button");
     var ansBtn3 = document.createElement("button");
     var ansBtn4 = document.createElement("button");
-
-    for (var i = 0; i < javascriptQuestions.length; i++)
+    for (var i = 0; i < javascriptQuestions.length; i++) {
+    mainEl.innerHTML = javascriptQuestions[i].question;
+   
     ansBtn1.textContent = javascriptQuestions[i].a;
-    for (var i = 0; i < javascriptQuestions.length; i++)
     ansBtn2.textContent = javascriptQuestions[i].b;
-    for (var i = 0; i < javascriptQuestions.length; i++)
     ansBtn3.textContent = javascriptQuestions[i].c;
-    for (var i = 0; i < javascriptQuestions.length; i++)
     ansBtn4.textContent = javascriptQuestions[i].d;
 
     answerbtn1.appendChild(ansBtn1);
