@@ -165,8 +165,7 @@ function buildQuiz() {
     ansBtn4.addEventListener("click", "d")
 
 }
-function qResult
-if 
+
 
 
 var startGame = document.getElementById("button")
