@@ -7,7 +7,8 @@ var ansBtn1 = document.getElementById("answerbtn1");
 var ansBtn2 = document.getElementById("answerbtn2");
 var ansBtn3 = document.getElementById("answerbtn3");
 var ansBtn4 = document.getElementById("answerbtn4");
-
+var questionNumber = 0;
+var qAnswer = javascriptQuestions
 
 var javascriptQuestions = [
   {
@@ -114,7 +115,8 @@ instructEl.textContent = "When you begin the quiz, you will have two minutes to 
 function quiz () {
     instructEl.textContent = "";
     removeStartBtn();
-    buildQuiz();
+    buildQuiz(questionNumber);
+
     var timeLeft = 120;
 var timeInterval = setInterval(function() {
         if (timeLeft > 1) {
@@ -145,21 +147,26 @@ function buildQuiz() {
     var ansBtn2 = document.createElement("button");
     var ansBtn3 = document.createElement("button");
     var ansBtn4 = document.createElement("button");
-    for (var i = 0; i < javascriptQuestions.length; i++) {
-    mainEl.innerHTML = javascriptQuestions[i].question;
+    mainEl.innerHTML = javascriptQuestions[questionNumber].question;
    
-    ansBtn1.textContent = javascriptQuestions[i].a;
-    ansBtn2.textContent = javascriptQuestions[i].b;
-    ansBtn3.textContent = javascriptQuestions[i].c;
-    ansBtn4.textContent = javascriptQuestions[i].d;
+    ansBtn1.textContent = javascriptQuestions[questionNumber].a;
+    ansBtn2.textContent = javascriptQuestions[questionNumber].b;
+    ansBtn3.textContent = javascriptQuestions[questionNumber].c;
+    ansBtn4.textContent = javascriptQuestions[questionNumber].d;
 
     answerbtn1.appendChild(ansBtn1);
     answerbtn2.appendChild(ansBtn2);
     answerbtn3.appendChild(ansBtn3);
     answerbtn4.appendChild(ansBtn4);
-}
-}
 
+    ansBtn1.addEventListener("click", "a")
+    ansBtn2.addEventListener("click", "b")
+    ansBtn3.addEventListener("click", "c")
+    ansBtn4.addEventListener("click", "d")
+
+}
+function qResult
+if 
 
 
 var startGame = document.getElementById("button")
