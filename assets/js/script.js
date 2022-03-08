@@ -8,7 +8,10 @@ var ansBtn2 = document.getElementById("answerbtn2");
 var ansBtn3 = document.getElementById("answerbtn3");
 var ansBtn4 = document.getElementById("answerbtn4");
 var questionNumber = 0;
-var qAnswer = javascriptQuestions
+var corAns = document.getElementById("feedback-correct");
+var incorAns = document.getElementById("feedback-incorrect");
+
+
 
 var javascriptQuestions = [
   {
@@ -98,12 +101,6 @@ question: "What word is NOT reserved in Javascript?",
 
 ]
 
-function highscore () {
-    if (timeLeft > 0) {
-        highScoreEl = "Your score is " + timeLeft;
-    }
-}
-
 var startBtnEl = document.createElement("button");
 startBtnEl.innerHTML = "Click to Begin"
 button.appendChild(startBtnEl);
@@ -139,7 +136,6 @@ function removeStartBtn() {
     return false;
 
 }
-
 }
 function buildQuiz() {
 
@@ -159,11 +155,65 @@ function buildQuiz() {
     answerbtn3.appendChild(ansBtn3);
     answerbtn4.appendChild(ansBtn4);
 
-    ansBtn1.addEventListener("click", "a")
-    ansBtn2.addEventListener("click", "b")
-    ansBtn3.addEventListener("click", "c")
-    ansBtn4.addEventListener("click", "d")
+    ansBtn1.dataset.answer = "a";
+    ansBtn2.dataset.answer = "b";
+    ansBtn3.dataset.answer = "c";
+    ansBtn4.dataset.answer = "d";
 
+    ansBtn1.addEventListener("click", checkAnswer);    
+    ansBtn2.addEventListener("click", checkAnswer);
+    ansBtn3.addEventListener("click", checkAnswer);
+    ansBtn4.addEventListener("click", checkAnswer);
+
+}
+var corAnswer = javascriptQuestions[questionNumber].correctAnswer;
+function checkAnswer(event) {
+   
+    if (event.target.getAttribute("data-answer") === corAnswer) {
+        corAns.textContent = "Correct!";
+        incorAns.textContent = ""
+        } else if (event.target.getAttribute("data-answer") != corAnswer) {
+        corAns.textContent = "";
+        incorAns.textContent = "Sorry, wrong answer. Subtracting ten seconds from time remaining."
+        timerEl -= 10
+        } else {
+        alert("There has been an error. Please reload page and try again.")
+    }
+    removeButtons();
+    nextQuestion();
+}
+function removeButtons () {
+    var elem1 = document.getElementById("answerbtn1", "answerbtn2", "answerbtn3", "answerbtn4");
+    elem1.parentNode.removeChild(elem1);
+    return false;
+    
+
+}
+
+function nextQuestion() {
+        if (questionNumber < javascriptQuestions.length) {
+            questionNumber = questionNumber + 1;
+            buildQuiz();
+        } else if (questionNumber = questionNumber.length) {
+            endGame();
+        } else  {
+        alert("There has been an error. Please reload page and try again.");
+    }
+
+    console.log(event.target);
+    console.log(corAnswer);
+    console.log(event.target.getAttribute("data-answer"));
+  
+}
+
+function endGame () {
+    alert("Your score is " + timeLeft);
+
+}
+function highscore () {
+    if (timeLeft > 0) {
+        highScoreEl = "Your score is " + timeLeft;
+    }
 }
 
 
