@@ -114,6 +114,7 @@ instructEl.textContent = "When you begin the quiz, you will have two minutes to 
 function quiz () {
     instructEl.textContent = "";
     removeStartBtn();
+    buildQuiz();
     var timeLeft = 120;
 var timeInterval = setInterval(function() {
         if (timeLeft > 1) {
@@ -134,6 +135,7 @@ function removeStartBtn() {
     var elem = document.getElementById('button');
     elem.parentNode.removeChild(elem);
     return false;
+
 }
 
 }
