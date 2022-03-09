@@ -1,0 +1,18 @@
+.highscore {
+    float: left;
+}
+.timer {
+    float: right;
+}
+.main-area {
+    display: block;
+    text-align: center ;
+    margin: 0 80px;
+}
+footer p {
+    margin: 75px
+}
+.highscore {
+    color: blue;
+    border-bottom: 3px solid blue;
+}

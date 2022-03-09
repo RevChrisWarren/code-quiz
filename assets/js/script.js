@@ -1,4 +1,4 @@
-var highScoreEl = document.getElementById("highscore");
+var highScoreEl = document.getElementById("highscore-show");
 var timerEl = document.getElementById("timer-count");
 var mainEl = document.getElementById("main");
 var btn = document.querySelector("button");
@@ -10,7 +10,7 @@ var ansBtn4 = document.getElementById("answerbtn4");
 var questionNumber = 0;
 var corAns = document.getElementById("feedback-correct");
 var incorAns = document.getElementById("feedback-incorrect");
-
+var score = timeLeft;
 
 
 var javascriptQuestions = [
@@ -103,6 +103,9 @@ question: "What word is NOT reserved in Javascript?",
 
 var startBtnEl = document.createElement("button");
 startBtnEl.innerHTML = "Click to Begin"
+startBtnEl.style.padding = "20px";
+startBtnEl.style.backgroundColor = "green";
+startBtnEl.style.color = "white";
 button.appendChild(startBtnEl);
 
 mainEl.textContent = "Javascript Code Quiz!"
@@ -140,9 +143,21 @@ function removeStartBtn() {
 function buildQuiz() {
 
     var ansBtn1 = document.createElement("button");
+    ansBtn1.style.backgroundColor = "blue";
+    ansBtn1.style.color = "white";
+    ansBtn1.style.padding = "15px";
     var ansBtn2 = document.createElement("button");
+    ansBtn2.style.backgroundColor = "blue";
+    ansBtn2.style.color = "white";
+    ansBtn2.style.padding = "15px";
     var ansBtn3 = document.createElement("button");
+    ansBtn3.style.backgroundColor = "blue";
+    ansBtn3.style.color = "white";
+    ansBtn3.style.padding = "15px";
     var ansBtn4 = document.createElement("button");
+    ansBtn4.style.backgroundColor = "blue";
+    ansBtn4.style.color = "white";
+    ansBtn4.style.padding = "15px";
     mainEl.innerHTML = javascriptQuestions[questionNumber].question;
    
     ansBtn1.textContent = javascriptQuestions[questionNumber].a;
@@ -179,16 +194,16 @@ function checkAnswer(event) {
         } else {
         alert("There has been an error. Please reload page and try again.")
     }
-    removeButtons();
+    //removeButtons();
     nextQuestion();
 }
-function removeButtons () {
-    var elem1 = document.getElementById("answerbtn1", "answerbtn2", "answerbtn3", "answerbtn4");
-    elem1.parentNode.removeChild(elem1);
-    return false;
+// function removeButtons () {
+//     var elem1 = document.getElementById("answerbtn1", "answerbtn2", "answerbtn3", "answerbtn4");
+//     elem1.parentNode.removeChild(elem1);
+//     return false;
     
 
-}
+//}
 
 function nextQuestion() {
         if (questionNumber < javascriptQuestions.length) {
@@ -210,11 +225,13 @@ function endGame () {
     alert("Your score is " + timeLeft);
 
 }
-function highscore () {
-    if (timeLeft > 0) {
-        highScoreEl = "Your score is " + timeLeft;
+var highscore = localStorage.getItem("highscore"); 
+    if (highscore !== null) {
+        localStorage.setItem("highscore", score);
+    } else {
+        localStorage.setItem("highscore", score);
     }
-}
+
 
 
 
