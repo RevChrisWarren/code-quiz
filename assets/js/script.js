@@ -10,7 +10,7 @@ var ansBtn4 = document.getElementById("answerbtn4");
 var questionNumber = 0;
 var corAns = document.getElementById("feedback-correct");
 var incorAns = document.getElementById("feedback-incorrect");
-var score = timeLeft;
+var score = 0;
 
 
 var javascriptQuestions = [
@@ -238,3 +238,8 @@ var highscore = localStorage.getItem("highscore");
 var startGame = document.getElementById("button")
  startGame.addEventListener("click", quiz);
 
+highScoreEl.addEventListener("click", showHighScore);
+
+function showHighScore () {
+    alert("The High Score is " + highscore);
+}
