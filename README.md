@@ -1,5 +1,7 @@
 # code-quiz
 
+![site Screenshot](assets/ChrisWarrenCodeQuiz.jpeg)
+
 ## This is a timed quiz with questions about javascript. When the user begins, they have two minutes to answer 10 multiple choice questions. The time left on the timer is the user's score.
 ## When an answer is selected, the user receives immediate feedback whether the answer is correct or incorrect.
 ## An incorrect answer takes ten seconds off the timer.
