@@ -11,8 +11,7 @@ var questionNumber = 0;
 var corAns = document.getElementById("feedback-correct");
 var incorAns = document.getElementById("feedback-incorrect");
 var score = 0;
-var highScore = localStorage.getItem("highscore");
-var hsInitials = localStorage.getItem("initials");
+
 
 var javascriptQuestions = [
   {
@@ -84,7 +83,7 @@ var javascriptQuestions = [
     correctAnswer: "d"
 },
 {
-question: "What is used to set off the code to be executed in a function?", 
+question: "What is used to set off the code to executed in a function?", 
         a: "parentheses",
         b: "commas",
         c: "curly brackets",
@@ -112,13 +111,15 @@ button.appendChild(startBtnEl);
 mainEl.textContent = "Javascript Code Quiz!"
 instructEl.textContent = "When you begin the quiz, you will have two minutes to answer ten questions about Javascript. Your score will equal the time remaining. If you submit an incorrect response, ten seconds will be deducted from the time remaining. Afterwards you can check your score against the high score. Have fun!"
 
-var timeLeft = 120;
+
 function quiz () {
     instructEl.textContent = "";
     removeStartBtn();
-    buildQuiz(questionNumber);
+    buildButtons();
+   
+   
 
- 
+    var timeLeft = 120;
 var timeInterval = setInterval(function() {
         if (timeLeft > 1) {
         timerEl.textContent = timeLeft + " seconds remaining.";
@@ -129,6 +130,7 @@ var timeInterval = setInterval(function() {
     } else {
         timerEl.textContent = "";
         clearInterval(timeInterval);
+        displayMessage();
     }
     
 }, 1000);
@@ -140,41 +142,78 @@ function removeStartBtn() {
 
 }
 }
-function buildQuiz() {
-    removeButtons();
-    
-
+function buildButtons() {
     var ansBtn1 = document.createElement("button");
     ansBtn1.style.backgroundColor = "blue";
     ansBtn1.style.color = "white";
     ansBtn1.style.padding = "15px";
-    ansBtn1.style.margin = "10px";
     var ansBtn2 = document.createElement("button");
     ansBtn2.style.backgroundColor = "blue";
     ansBtn2.style.color = "white";
     ansBtn2.style.padding = "15px";
-    ansBtn2.style.margin = "10px";
     var ansBtn3 = document.createElement("button");
     ansBtn3.style.backgroundColor = "blue";
     ansBtn3.style.color = "white";
     ansBtn3.style.padding = "15px";
-    ansBtn3.style.margin = "10px";
     var ansBtn4 = document.createElement("button");
     ansBtn4.style.backgroundColor = "blue";
     ansBtn4.style.color = "white";
     ansBtn4.style.padding = "15px";
-    ansBtn4.style.margin = "10px";
-    mainEl.innerHTML = javascriptQuestions[questionNumber].question;
-   
+  
+    answerbtn1.appendChild(ansBtn1);
+    answerbtn2.appendChild(ansBtn2);
+    answerbtn3.appendChild(ansBtn3);
+    answerbtn4.appendChild(ansBtn4);
+
     ansBtn1.textContent = javascriptQuestions[questionNumber].a;
     ansBtn2.textContent = javascriptQuestions[questionNumber].b;
     ansBtn3.textContent = javascriptQuestions[questionNumber].c;
     ansBtn4.textContent = javascriptQuestions[questionNumber].d;
 
-    answerbtn1.appendChild(ansBtn1);
-    answerbtn2.appendChild(ansBtn2);
-    answerbtn3.appendChild(ansBtn3);
-    answerbtn4.appendChild(ansBtn4);
+    mainEl.innerHTML = javascriptQuestions[questionNumber].question;
+
+
+    ansBtn1.dataset.answer = "a";
+    ansBtn2.dataset.answer = "b";
+    ansBtn3.dataset.answer = "c";
+    ansBtn4.dataset.answer = "d";
+
+    ansBtn1.addEventListener("click", checkAnswer);    
+    ansBtn2.addEventListener("click", checkAnswer);
+    ansBtn3.addEventListener("click", checkAnswer);
+    ansBtn4.addEventListener("click", checkAnswer);
+    
+}
+function buildQuiz() {
+    // var ansBtn1 = document.createElement("button");
+    // ansBtn1.style.backgroundColor = "blue";
+    // ansBtn1.style.color = "white";
+    // ansBtn1.style.padding = "15px";
+    // var ansBtn2 = document.createElement("button");
+    // ansBtn2.style.backgroundColor = "blue";
+    // ansBtn2.style.color = "white";
+    // ansBtn2.style.padding = "15px";
+    // var ansBtn3 = document.createElement("button");
+    // ansBtn3.style.backgroundColor = "blue";
+    // ansBtn3.style.color = "white";
+    // ansBtn3.style.padding = "15px";
+    // var ansBtn4 = document.createElement("button");
+    // ansBtn4.style.backgroundColor = "blue";
+    // ansBtn4.style.color = "white";
+    // ansBtn4.style.padding = "15px";
+  
+    // answerbtn1.appendChild(ansBtn1);
+    // answerbtn2.appendChild(ansBtn2);
+    // answerbtn3.appendChild(ansBtn3);
+    // answerbtn4.appendChild(ansBtn4);
+
+    ansBtn1.textContent = javascriptQuestions[questionNumber].a;
+    ansBtn2.textContent = javascriptQuestions[questionNumber].b;
+    ansBtn3.textContent = javascriptQuestions[questionNumber].c;
+    ansBtn4.textContent = javascriptQuestions[questionNumber].d;
+
+    mainEl.innerHTML = javascriptQuestions[questionNumber].question;
+
 
     ansBtn1.dataset.answer = "a";
     ansBtn2.dataset.answer = "b";
@@ -187,7 +226,8 @@ function buildQuiz() {
     ansBtn4.addEventListener("click", checkAnswer);
 
 }
-    
+
+
 function checkAnswer(event) {
     var corAnswer = javascriptQuestions[questionNumber].correctAnswer;
     if (event.target.getAttribute("data-answer") === corAnswer) {
@@ -196,80 +236,61 @@ function checkAnswer(event) {
         } else if (event.target.getAttribute("data-answer") != corAnswer) {
         corAns.textContent = "";
         incorAns.textContent = "Sorry, wrong answer. Subtracting ten seconds from time remaining.";
-        timeLeft = timeLeft-10;
+        timerEl -= 10;
         } else {
         alert("There has been an error. Please reload page and try again.")
     }
-   
+ 
     nextQuestion();
 }
-function removeButtons () {
-    ansBtn1.textContent = "";
-    ansBtn2.textContent = "";
-    ansBtn3.textContent = "";
-    ansBtn4.textContent = "";
+// function removeButtons () {
+//     var elem1 = document.getElementById("answerbtn1");
+//     elem1.parentNode.removeChild(elem1);
+//     var elem2 = document.getElementById("answerbtn2");
+//     elem2.parentNode.removeChild(elem2);
+//     var elem3 = document.getElementById("answerbtn3");
+//     elem3.parentNode.removeChild(elem3);
+//     var elem4 = document.getElementById("answerbtn4");
+//     elem4.parentNode.removeChild(elem4);
 
-}
+// }
 
 function nextQuestion() {
-        if (questionNumber < javascriptQuestions.length - 1) {
+    var corAnswer = javascriptQuestions[questionNumber].correctAnswer;
+        if (questionNumber < javascriptQuestions.length) {
             questionNumber = questionNumber + 1;
             buildQuiz();
-        } else if (questionNumber = javascriptQuestions.length -1) {
-            clearScreen();
+        } else if (questionNumber = questionNumber.length) {
+            endGame();
         } else  {
         alert("There has been an error. Please reload page and try again.");
     }
+
+    console.log(event.target);
+    console.log(corAnswer);
+    console.log(event.target.getAttribute("data-answer"));
   
 }
 
 function endGame () {
     alert("Your score is " + timeLeft);
-    if (timeLeft > highScore) {
-        highScore = timeLeft;
-    localStorage.setItem("highscore", highScore)
-    clearInterval();
-     highscoreshow();
+
+}
+var highscore = localStorage.getItem("highscore"); 
+    if (highscore !== null) {
+        localStorage.setItem("highscore", score);
     } else {
-        alert("Thank you for playing!");
-        playAgain();
-    
-    } 
-}
+        localStorage.setItem("highscore", score);
+    }
 
 
-function clearScreen() {
-    clearInterval();
-    timerEl.remove();
-    ansBtn1.textContent = "";
-    ansBtn2.textContent = "";
-    ansBtn3.textContent = "";
-    ansBtn4.textContent = "";
-    startBtnEl.innerHTML = "";
-    mainEl.innerHTML = "";
-    corAns.textContent = "";
-    incorAns.textContent = "";
-    endGame();
-}
 
 
-function highscoreshow() {
-    hsInitials = window.prompt("You have the high score! Insert your initials here");
-    localStorage.setItem("initials", hsInitials);
-    alert("The High Score is " + highScore + " set by " + hsInitials);
-    playAgain();
-}
- function showhighscore() {
-    alert("The High Score is " + highScore + " set by " + hsInitials);
- }
-
-function playAgain() {
-   if (confirm("Would you like to play again?")) {   
-       location.reload();
-    } else {
-        alert("Come back and play again!");
-}
-}
 var startGame = document.getElementById("button")
-    startGame.addEventListener("click", quiz);
-    highScoreEl.addEventListener("click", showhighscore)
+ startGame.addEventListener("click", quiz);
+
+highScoreEl.addEventListener("click", showHighScore);
+
+function showHighScore () {
+    alert("The High Score is " + highscore + " set by " + hsInitials);
+}
