@@ -16,90 +16,90 @@ var hsInitials = localStorage.getItem("initials");
 
 // create array to store questions and answers
 var javascriptQuestions = [
-  {
-      question: "Who invented Javascript?",
-      
-          a: "Steve Jobs",
-          b: "Bill Gates",
-          c: "Brendan Eich",
-          d: "Linus Torvalds",
-      
-      correctAnswer: "c"
-  },  
-  {
-    question: "Which of these is NOT a data type in Javascript?",
+    {
+        question: "Who invented Javascript?",
+
+        a: "Steve Jobs",
+        b: "Bill Gates",
+        c: "Brendan Eich",
+        d: "Linus Torvalds",
+
+        correctAnswer: "c"
+    },
+    {
+        question: "Which of these is NOT a data type in Javascript?",
         a: "string",
         b: "text",
         c: "number",
         d: "object",
-    correctAnswer: "b"
-  },
-  {
-      question: "What do you use to set off items in an array?",
-          a: "square brackets",
-          b: "curly brackets",
-          c: "parentheses",
-          d: "semi-colons",
-      correctAnswer: "a"
-  },
-  {
-      question: "Given Math.ceil(4.1), what will be the result?",
-          a: "4.1",
-          b: "4",
-          c: "0",
-          d: "5",
-  correctAnswer: "d"
-},
-  {
-        question: "What is the purpose of a switch statement?",
-            a: "to turn an animation on or off",
-            b: "to perform different actions based on different conditions",
-            c: "to change the default setting of localStorage",
-            d: "to return a text string in lowercase",
         correctAnswer: "b"
-  },
-  {
-      question: "What is 'hoisting' in Javascript?",
-          a: "Javascript's default behavior of moving declarations to the top",
-          b: "Javascript's behaior of compatibility with older web browsers",
-          c: "Javascript's ability to customize animations",
-          d: "Javascript's way of lifting errors for rapid debugging",
-      correctAnswer : "a"
-  },
-  
-  {
-      question: "To what does 'this' refer when it is used alone?", 
+    },
+    {
+        question: "What do you use to set off items in an array?",
+        a: "square brackets",
+        b: "curly brackets",
+        c: "parentheses",
+        d: "semi-colons",
+        correctAnswer: "a"
+    },
+    {
+        question: "Given Math.ceil(4.1), what will be the result?",
+        a: "4.1",
+        b: "4",
+        c: "0",
+        d: "5",
+        correctAnswer: "d"
+    },
+    {
+        question: "What is the purpose of a switch statement?",
+        a: "to turn an animation on or off",
+        b: "to perform different actions based on different conditions",
+        c: "to change the default setting of localStorage",
+        d: "to return a text string in lowercase",
+        correctAnswer: "b"
+    },
+    {
+        question: "What is 'hoisting' in Javascript?",
+        a: "Javascript's default behavior of moving declarations to the top",
+        b: "Javascript's behaior of compatibility with older web browsers",
+        c: "Javascript's ability to customize animations",
+        d: "Javascript's way of lifting errors for rapid debugging",
+        correctAnswer: "a"
+    },
+
+    {
+        question: "To what does 'this' refer when it is used alone?",
         a: "the global object",
         b: "the most recently named variable",
         c: "the most recently called function",
         d: "the object directly following 'this'",
-      correctAnswer: "a"
-  },
+        correctAnswer: "a"
+    },
 
-  {
-  question: "What is the purpose of a 'while' loop?",
+    {
+        question: "What is the purpose of a 'while' loop?",
         a: "to create a countdown while waiting for a response",
         b: "to write information to sessionStorage",
         c: "to invoke a callback of a previously used function",
         d: "to loop through a block of code as long as a specified condition exists",
-    correctAnswer: "d"
-},
-{
-question: "What is used to set off the code to be executed in a function?", 
+        correctAnswer: "d"
+    },
+    {
+        question: "What is used to set off the code to be executed in a function?",
         a: "parentheses",
         b: "commas",
         c: "curly brackets",
         d: "square brackets",
-    correctAnswer: "c"
-},
-{
-question: "What word is NOT reserved in Javascript?",
+        correctAnswer: "c"
+    },
+    {
+        question: "What word is NOT reserved in Javascript?",
         a: "true",
         b: "break",
         c: "car",
         d: "debugger",
-    correctAnswer: "c"
-},
+        correctAnswer: "c"
+    },
 ]
 
 // create and style a button that starts the game
@@ -116,39 +116,39 @@ instructEl.textContent = "When you begin the quiz, you will have two minutes to 
 
 // set the time and get quiz going
 var timeLeft = 120;
-function quiz () {
+function quiz() {
     instructEl.textContent = "";
     removeStartBtn();
     buildQuiz(questionNumber);
 
- // set interval for the countdown and end game if count ends
-var timeInterval = setInterval(function() {
+    // set interval for the countdown and end game if count ends
+    var timeInterval = setInterval(function () {
         if (timeLeft > 1) {
-        timerEl.textContent = timeLeft + " seconds remaining.";
-        timeLeft--;
-    } else if (timeLeft === 1) {
-        timerEl.textContent = timeLeft + " second remaining.";
-        timeLeft--;
-    } else {
-        timerEl.textContent = "";
-        clearInterval(timeInterval);
-        clearScreen();
+            timerEl.textContent = timeLeft + " seconds remaining.";
+            timeLeft--;
+        } else if (timeLeft === 1) {
+            timerEl.textContent = timeLeft + " second remaining.";
+            timeLeft--;
+        } else {
+            timerEl.textContent = "";
+            clearInterval(timeInterval);
+            clearScreen();
+        }
+
+    }, 1000);
+
+    //clear the opening page elements for the quiz to begin
+    function removeStartBtn() {
+        var elem = document.getElementById('button');
+        elem.parentNode.removeChild(elem);
+        return false;
+
     }
-    
-}, 1000);
-
-//clear the opening page elements for the quiz to begin
-function removeStartBtn() {
-    var elem = document.getElementById('button');
-    elem.parentNode.removeChild(elem);
-    return false;
-
-}
 }
 //create and loop through quiz questions
 function buildQuiz() {
     removeButtons();
-    
+
 
     var ansBtn1 = document.createElement("button");
     ansBtn1.style.backgroundColor = "blue";
@@ -171,7 +171,7 @@ function buildQuiz() {
     ansBtn4.style.padding = "15px";
     ansBtn4.style.margin = "10px";
     mainEl.innerHTML = javascriptQuestions[questionNumber].question;
-   
+
     ansBtn1.textContent = javascriptQuestions[questionNumber].a;
     ansBtn2.textContent = javascriptQuestions[questionNumber].b;
     ansBtn3.textContent = javascriptQuestions[questionNumber].c;
@@ -187,30 +187,30 @@ function buildQuiz() {
     ansBtn3.dataset.answer = "c";
     ansBtn4.dataset.answer = "d";
 
-    ansBtn1.addEventListener("click", checkAnswer);    
+    ansBtn1.addEventListener("click", checkAnswer);
     ansBtn2.addEventListener("click", checkAnswer);
     ansBtn3.addEventListener("click", checkAnswer);
     ansBtn4.addEventListener("click", checkAnswer);
 
 }
-    // give feedback about whether the question answers are correct or not
+// give feedback about whether the question answers are correct or not
 function checkAnswer(event) {
     var corAnswer = javascriptQuestions[questionNumber].correctAnswer;
     if (event.target.getAttribute("data-answer") === corAnswer) {
         corAns.textContent = "Correct!";
         incorAns.textContent = ""
-        } else if (event.target.getAttribute("data-answer") != corAnswer) {
+    } else if (event.target.getAttribute("data-answer") != corAnswer) {
         corAns.textContent = "";
         incorAns.textContent = "Sorry, wrong answer. Subtracting ten seconds from time remaining.";
-        timeLeft = timeLeft-10;
-        }  else {
+        timeLeft = timeLeft - 10;
+    } else {
         alert("There has been an error. Please reload page and try again.")
     }
-   
+
     nextQuestion();
 }
 //remove previously made buttons before creating the new ones for each question
-function removeButtons () {
+function removeButtons() {
     ansBtn1.textContent = "";
     ansBtn2.textContent = "";
     ansBtn3.textContent = "";
@@ -219,29 +219,29 @@ function removeButtons () {
 }
 // move through the array to the next question
 function nextQuestion() {
-        if (questionNumber < javascriptQuestions.length - 1) {
-            questionNumber = questionNumber + 1;
-            buildQuiz();
-        } else if (questionNumber = javascriptQuestions.length -1) {
-            clearScreen();
-        } else  {
+    if (questionNumber < javascriptQuestions.length - 1) {
+        questionNumber = questionNumber + 1;
+        buildQuiz();
+    } else if (questionNumber = javascriptQuestions.length - 1) {
+        clearScreen();
+    } else {
         alert("There has been an error. Please reload page and try again.");
     }
-  
+
 }
 // give feedback score and capture initials if highscore
-function endGame () {
+function endGame() {
     alert("Your score is " + timeLeft);
     if (timeLeft > highScore) {
         highScore = timeLeft;
-    localStorage.setItem("highscore", highScore)
-    clearInterval();
-     highscoreshow();
+        localStorage.setItem("highscore", highScore)
+        clearInterval();
+        highscoreshow();
     } else {
         alert("Thank you for playing!");
         playAgain();
-    
-    } 
+
+    }
 }
 
 //clear the screen at the end of the game
@@ -266,17 +266,17 @@ function highscoreshow() {
     alert("The High Score is " + highScore + " set by " + hsInitials);
     playAgain();
 }
- function showhighscore() {
+function showhighscore() {
     alert("The High Score is " + highScore + " set by " + hsInitials);
- }
+}
 
 function playAgain() {
-   if (confirm("Would you like to play again?")) {   
-       location.reload();
+    if (confirm("Would you like to play again?")) {
+        location.reload();
     } else {
         alert("Come back and play again!");
-}
+    }
 }
 var startGame = document.getElementById("button")
-    startGame.addEventListener("click", quiz);
-    highScoreEl.addEventListener("click", showhighscore)
+startGame.addEventListener("click", quiz);
+highScoreEl.addEventListener("click", showhighscore)
