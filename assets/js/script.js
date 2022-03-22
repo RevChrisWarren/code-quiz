@@ -14,6 +14,7 @@ var score = 0;
 var highScore = localStorage.getItem("highscore");
 var hsInitials = localStorage.getItem("initials");
 
+// create array to store questions and answers
 var javascriptQuestions = [
   {
       question: "Who invented Javascript?",
@@ -99,9 +100,9 @@ question: "What word is NOT reserved in Javascript?",
         d: "debugger",
     correctAnswer: "c"
 },
-
 ]
 
+// create and style a button that starts the game
 var startBtnEl = document.createElement("button");
 startBtnEl.innerHTML = "Click to Begin"
 startBtnEl.style.padding = "20px";
@@ -109,16 +110,18 @@ startBtnEl.style.backgroundColor = "green";
 startBtnEl.style.color = "white";
 button.appendChild(startBtnEl);
 
+// Greet the quiz taker and give instructions
 mainEl.textContent = "Javascript Code Quiz!"
 instructEl.textContent = "When you begin the quiz, you will have two minutes to answer ten questions about Javascript. Your score will equal the time remaining. If you submit an incorrect response, ten seconds will be deducted from the time remaining. Afterwards you can check your score against the high score. Have fun!"
 
+// set the time and get quiz going
 var timeLeft = 120;
 function quiz () {
     instructEl.textContent = "";
     removeStartBtn();
     buildQuiz(questionNumber);
 
- 
+ // set interval for the countdown and end game if count ends
 var timeInterval = setInterval(function() {
         if (timeLeft > 1) {
         timerEl.textContent = timeLeft + " seconds remaining.";
@@ -129,10 +132,12 @@ var timeInterval = setInterval(function() {
     } else {
         timerEl.textContent = "";
         clearInterval(timeInterval);
+        clearScreen();
     }
     
 }, 1000);
 
+//clear the opening page elements for the quiz to begin
 function removeStartBtn() {
     var elem = document.getElementById('button');
     elem.parentNode.removeChild(elem);
@@ -140,6 +145,7 @@ function removeStartBtn() {
 
 }
 }
+//create and loop through quiz questions
 function buildQuiz() {
     removeButtons();
     
@@ -187,7 +193,7 @@ function buildQuiz() {
     ansBtn4.addEventListener("click", checkAnswer);
 
 }
-    
+    // give feedback about whether the question answers are correct or not
 function checkAnswer(event) {
     var corAnswer = javascriptQuestions[questionNumber].correctAnswer;
     if (event.target.getAttribute("data-answer") === corAnswer) {
@@ -197,12 +203,13 @@ function checkAnswer(event) {
         corAns.textContent = "";
         incorAns.textContent = "Sorry, wrong answer. Subtracting ten seconds from time remaining.";
         timeLeft = timeLeft-10;
-        } else {
+        }  else {
         alert("There has been an error. Please reload page and try again.")
     }
    
     nextQuestion();
 }
+//remove previously made buttons before creating the new ones for each question
 function removeButtons () {
     ansBtn1.textContent = "";
     ansBtn2.textContent = "";
@@ -210,7 +217,7 @@ function removeButtons () {
     ansBtn4.textContent = "";
 
 }
-
+// move through the array to the next question
 function nextQuestion() {
         if (questionNumber < javascriptQuestions.length - 1) {
             questionNumber = questionNumber + 1;
@@ -222,7 +229,7 @@ function nextQuestion() {
     }
   
 }
-
+// give feedback score and capture initials if highscore
 function endGame () {
     alert("Your score is " + timeLeft);
     if (timeLeft > highScore) {
@@ -237,7 +244,7 @@ function endGame () {
     } 
 }
 
-
+//clear the screen at the end of the game
 function clearScreen() {
     clearInterval();
     timerEl.remove();
@@ -252,7 +259,7 @@ function clearScreen() {
     endGame();
 }
 
-
+// use alerts to show the scores and invite the player to play again
 function highscoreshow() {
     hsInitials = window.prompt("You have the high score! Insert your initials here");
     localStorage.setItem("initials", hsInitials);
